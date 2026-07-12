@@ -9,7 +9,8 @@ import com.mapping.exception.StudentNotFoundException;
 import com.mapping.repository.impl.CourseRepositoryImpl;
 import com.mapping.repository.impl.StudentRepositoryImpl;
 import com.mapping.service.StudentService;
-import com.mapping.util.InputUtil;
+import com.mapping.util.MapperUtil;
+
 
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +25,7 @@ public class StudentServiceImpl implements StudentService {
     }
     @Override
     public void saveStudent(StudentDTO studentDTO) {
-        Student student = InputUtil.convertStudentDtoToEntity(studentDTO);
+        Student student = MapperUtil.convertStudentDtoToEntity(studentDTO);
         studentRepository.saveStudent(student);
     }
 
@@ -34,7 +35,7 @@ public class StudentServiceImpl implements StudentService {
         if (Objects.isNull(student)) {
             throw new StudentNotFoundException("Student Not Found");
         }
-        return InputUtil.convertStudentEntityToDtoWithoutCourse(student);
+        return MapperUtil.convertStudentEntityToDtoWithoutCourse(student);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class StudentServiceImpl implements StudentService {
         if(Objects.isNull(student)){
             throw new StudentNotFoundException("student not found ");
         }
-        return InputUtil.convertStudentEntityToDto(student);
+        return MapperUtil.convertStudentEntityToDto(student);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class StudentServiceImpl implements StudentService {
         if(Objects.isNull(student)){
             throw new StudentNotFoundException("Student not found");
         }
-        Course course= InputUtil.convertCourseDtoToEntity(courseDTO);
+        Course course= MapperUtil.convertCourseDtoToEntity(courseDTO);
         studentRepository.addCourse(studentId,course);
     }
 
@@ -94,7 +95,7 @@ public class StudentServiceImpl implements StudentService {
         if(Objects.isNull(course)){
             throw new CourseNotFoundException("Course not found");
         }else{
-            Student student =InputUtil.convertStudentDtoToEntityWithoutCourse(studentDTO);
+            Student student =MapperUtil.convertStudentDtoToEntityWithoutCourse(studentDTO);
             studentRepository.addCoStudent(courseId,student);
         }
 
@@ -102,7 +103,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDTO> findAllStudents() {
-        return studentRepository.findAllStudents().stream().map(InputUtil::convertStudentEntityToDto).toList();
+        return studentRepository.findAllStudents().stream().map(MapperUtil::convertStudentEntityToDto).toList();
     }
 
 

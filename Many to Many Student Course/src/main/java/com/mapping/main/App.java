@@ -33,6 +33,7 @@ public class App {
                         courseDTOList.add(courseDTO);
                         studentDTO.setCourseDTOList(courseDTOList);
                         studentService.saveStudent(studentDTO);
+                        System.out.println("Student Details Added");
                         break;
                     case 2:
                         int studentid=InputUtil.acceptStudentIdtoOperate(sc);

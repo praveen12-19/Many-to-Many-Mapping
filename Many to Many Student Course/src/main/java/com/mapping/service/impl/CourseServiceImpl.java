@@ -5,7 +5,7 @@ import com.mapping.entity.Course;
 import com.mapping.exception.CourseNotFoundException;
 import com.mapping.repository.impl.CourseRepositoryImpl;
 import com.mapping.service.CourseService;
-import com.mapping.util.InputUtil;
+import com.mapping.util.MapperUtil;
 
 import java.util.Objects;
 
@@ -25,7 +25,7 @@ public class CourseServiceImpl implements CourseService {
         if(Objects.isNull(course)){
             throw new CourseNotFoundException("Course not found");
         }
-        return InputUtil.convertCourseEntityToDtoWithoutStudent(course);
+        return MapperUtil.convertCourseEntityToDtoWithoutStudent(course);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class CourseServiceImpl implements CourseService {
         if(Objects.isNull(course)){
             throw new CourseNotFoundException("Course not found");
         }
-        return InputUtil.convertCourseEntityTODto(course);
+        return MapperUtil.convertCourseEntityTODto(course);
     }
 }
 
